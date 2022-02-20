@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<form enctype="multipart/form-data" action="/add-publication/" method="post">
+    {% csrf_token %}
+    {{ add_post_form }}
+    <input type="submit" value="Add new post">
+</form>
+</body>
+</html>
