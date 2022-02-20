@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<div>
+     {% if error %}
+        <p>Invalid username or password</p>
+    {% endif %}
+    <form action="/authorization/" method="post">
+        {% csrf_token %}
+        {{ auth_form }}
+        <input type="submit" value="Log in">
+    </form>
+</div>
+</body>
+</html>

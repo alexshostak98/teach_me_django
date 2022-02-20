@@ -20,11 +20,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from publication_app.views import main_page
 from publication_app.views import add_publication_page
+from user_app.views import registration_page, authorization_page, profile_page, edit_profile_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
     path('add-publication/', add_publication_page),
+    path('registration/', registration_page),
+    path('authorization', authorization_page),
+    path('profile/', profile_page),
+    path('edit-profile/', edit_profile_page),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
