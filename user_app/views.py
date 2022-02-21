@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 
 from .forms.registration import RegistrationForm
 from .forms.authorization import AuthorizationForm
@@ -35,7 +35,6 @@ def authorization_page(request):
     return render(request, "authorization_page.html", context)
 
 
-# TODO: Поправить ошибку анонимности пользователя после смены пароля
 def profile_page(request):
     user = request.user
     profile = user.profile
@@ -52,9 +51,11 @@ def edit_profile_page(request):
         profile_form = EditProfileForm(request.POST, instance=profile)
         if user_form.is_valid() and profile_form.is_valid():
             # profile_form.save()
-            if user_form.save() is not None:
+            if not user_form.password_change():
+                user_form.save()
                 profile_form.save()
-                return redirect('/')
+                update_session_auth_hash(request, user)
+                return redirect('/profile/')
             error = True
     else:
         user_form = EditUserForm(instance=user)

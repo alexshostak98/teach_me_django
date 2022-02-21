@@ -27,7 +27,7 @@ urlpatterns = [
     path('', main_page),
     path('add-publication/', add_publication_page),
     path('registration/', registration_page),
-    path('authorization', authorization_page),
+    path('authorization/', authorization_page),
     path('profile/', profile_page),
     path('edit-profile/', edit_profile_page),
 ]
